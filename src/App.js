@@ -1,24 +1,55 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  increament,
+  decreament,
+  increamentByN,
+} from "./redux/action/counterAction";
+import Switch from "./Switch";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <b>Redux Simplified @Buggged</b>
+      <br /> <br />
+      <Counter />
+      <br />
+      <br />
+      <Switch />
+    </div>
+  );
+}
+
+function Counter() {
+  const counter = useSelector((state) => state.counter);
+  const dispatch = useDispatch();
+
+  return (
+    <div className="count">
+      <h3>Counter: {counter}</h3>
+      <br />
+      <button
+        onClick={() => {
+          dispatch(increament());
+        }}
+      >
+        Increament
+      </button>
+      <button
+        onClick={() => {
+          dispatch(increamentByN(5));
+        }}
+      >
+        Increament 5
+      </button>
+      <button
+        onClick={() => {
+          dispatch(decreament());
+        }}
+      >
+        Decreament
+      </button>
     </div>
   );
 }
